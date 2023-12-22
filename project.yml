@@ -1,0 +1,13 @@
+name: Test App
+targets:
+  Test App:
+    type: application
+    platform: tvOS
+    deploymentTarget: "13.0"
+    sources: [My App, Resources]
+    settings:
+      base:
+        INFOPLIST_FILE: Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.AppInstalleriOS.Test-App
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
