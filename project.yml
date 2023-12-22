@@ -3,7 +3,7 @@ targets:
   Test App:
     type: application
     platform: tvOS
-    deploymentTarget: "13.0"
+    deploymentTarget: "14.0"
     sources: [My App]
     settings:
       base:
