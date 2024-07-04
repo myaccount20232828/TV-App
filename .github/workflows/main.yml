@@ -32,13 +32,15 @@ jobs:
             #rm -rf Payload && rm -rf "$TMPDIR/App"
             xcodebuild -showsdks
             xrSDK=$(xcrun --sdk xros --show-sdk-path)
+            xrSYSRoot=$(xcrun --sdk xros --show-sdk-platform-path)
             echo $xrSDK
-            swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
+            echo $xrSYSRoot
+            swiftc -target arm64-apple-xros -sdk $xrSDK -sysroot $xrSYSRoot xrOS.swift -parse-as-library
             tvSDK=$(xcrun --sdk appletvos --show-sdk-path)
             tvSYSRoot=$(xcrun --sdk appletvos --show-sdk-platform-path)
             echo $tvSDK
             echo $tvSYSRoot
-            swiftc -target arm64-apple-tvos -sdk $tvSDK -sysroot $tvSYSRoot tvOS.swift -parse-as-library
+            swiftc -target arm64-apple-tvos14.0 -sdk $tvSDK -sysroot $tvSYSRoot tvOS.swift -parse-as-library
      - name: Git Push
        run: |
             git config user.name github-actions
