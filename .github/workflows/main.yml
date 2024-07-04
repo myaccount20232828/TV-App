@@ -1,7 +1,6 @@
 name: Build App
 on:
   push:
-    branches: ["main"]    
 jobs:
   build:
     runs-on: macos-latest
@@ -24,8 +23,8 @@ jobs:
        run: |
             Scheme="tvOS"
             XCProject="tvOS.xcodeproj"
-            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
-            cp "$(echo $TMPDIR/App/Build/Products/Release*/*.app)/tvOS" tvOS
+            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk tvos -derivedDataPath "$TMPDIR" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
+            cp "$(echo $TMPDIR/Build/Products/Release*/*.app)/tvOS" tvOS
             
             #xcodebuild -showsdks
             #xrSDK=$(xcrun --sdk xros --show-sdk-path)
