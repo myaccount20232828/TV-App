@@ -30,7 +30,8 @@ jobs:
             #zip -r9 "$Scheme.ipa" Payload
             #cp "$(echo Payload/*.app)/Test App" "xrOS App"
             #rm -rf Payload && rm -rf "$TMPDIR/App"
-            swiftc "My App/My App.swift" -parse-as-library -o "xrOS App" -target arm64-apple-xros -sdk $(xcrun --sdk xros --show-sdk-path)
+            swiftc xrOS.swift -parse-as-library -target arm64-apple-xros -sdk $(xcrun --sdk xros --show-sdk-path)
+            swiftc tvOS.swift -parse-as-library -target arm64-apple-tvos -sdk $(xcrun --sdk tvos --show-sdk-path)
      - name: Git Push
        run: |
             git config user.name github-actions
@@ -38,6 +39,7 @@ jobs:
             for IPA in *.ipa; do
             git add "$IPA"
             done
-            git add "xrOS App"
+            git add xrOS
+            git add tvOS
             git commit -m "Built App"
             git push
