@@ -24,7 +24,7 @@ jobs:
        run: |
             Scheme="Test App"
             XCProject="Test App.xcodeproj"
-            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk visionos -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
+            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
             mkdir Payload
             mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
             zip -r9 "$Scheme.ipa" Payload
