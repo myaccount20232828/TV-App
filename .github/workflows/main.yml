@@ -30,10 +30,11 @@ jobs:
             #zip -r9 "$Scheme.ipa" Payload
             #cp "$(echo Payload/*.app)/Test App" "xrOS App"
             #rm -rf Payload && rm -rf "$TMPDIR/App"
+            xcodebuild -showsdks
             xrSDK=$(xcrun --sdk xros --show-sdk-path)
             echo $xrSDK
             swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
-            tvSDK=$(xcrun --sdk tvos --show-sdk-path)
+            tvSDK=$(xcrun --sdk appletvos --show-sdk-path)
             echo $tvSDK
             swiftc -target arm64-apple-tvos -sdk $tvSDK tvOS.swift -parse-as-library
      - name: Git Push
