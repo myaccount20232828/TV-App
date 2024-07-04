@@ -14,7 +14,7 @@ struct MyApp: App {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: UIScreen.main.bounds.width - 80, height: 70)
-                .background(Color(UIColor.systemGray6))
+                .background(Color(UIColor.systemGray))
                 .cornerRadius(20)
             }
         }
@@ -48,7 +48,7 @@ struct LogView: View {
                         for Item in LogItems {
                             LogString += Item.Message
                         }
-                        UIPasteboard.general.string = LogString
+                        //UIPasteboard.general.string = LogString
                     } label: {
                         Label("Copy to clipboard", systemImage: "doc.on.doc")
                     }
@@ -58,7 +58,7 @@ struct LogView: View {
         }
         .padding()
         .frame(width: UIScreen.main.bounds.width - 80, height: 300)
-        .background(Color(UIColor.systemGray6))
+        .background(Color(UIColor.systemGray))
         .cornerRadius(20)
         .onAppear {
             // This code runs every time the log gets updated
