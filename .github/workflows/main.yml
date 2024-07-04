@@ -7,8 +7,11 @@ jobs:
     runs-on: macos-latest
     steps:
      - uses: actions/checkout@v3
+     - name: Test
+       run: |
+            ls /Applications/Xcode.app/Contents/Developer/Platforms
      - name: Install xcodegen
-       run: xcodebuild -showsdks && brew install xcodegen
+       run: brew install xcodegen
      - name: Generate XCProject
        run: xcodegen generate
      - name: Build App
