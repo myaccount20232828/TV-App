@@ -10,7 +10,7 @@ jobs:
      - name: Prepare VisionOS
        run: |
             brew install xcodesorg/made/xcodes
-            xcodes runtimes install 'visionOS 1.0 Beta 2'
+            xcodes runtimes install 'visionOS 1.0'
             #defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
             #defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
             #xcodebuild -downloadPlatform visionOS
