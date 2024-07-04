@@ -7,29 +7,30 @@ jobs:
     runs-on: macos-latest
     steps:
      - uses: actions/checkout@v3
-     - uses: maxim-lobanov/setup-xcode@v1
-       with:
-         xcode-version: latest-stable
-     - name: Test
-       run: |
-            xcodebuild -downloadPlatform visionOS
-            ls /Applications/Xcode.app/Contents/Developer/Platforms
-            xcodebuild -version
-            xcodebuild -showsdks
-     - name: Install xcodegen
-       run: brew install xcodegen
-     - name: Generate XCProject
-       run: xcodegen generate
+     #- uses: maxim-lobanov/setup-xcode@v1
+       #with:
+         #xcode-version: latest-stable
+     #- name: Test
+       #run: |
+            #xcodebuild -downloadPlatform visionOS
+            #ls /Applications/Xcode.app/Contents/Developer/Platforms
+            #xcodebuild -version
+            #xcodebuild -showsdks
+     #- name: Install xcodegen
+       #run: brew install xcodegen
+     #- name: Generate XCProject
+       #run: xcodegen generate*/
      - name: Build App
        run: |
-            Scheme="Test App"
-            XCProject="Test App.xcodeproj"
-            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
-            mkdir Payload
-            mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
-            zip -r9 "$Scheme.ipa" Payload
-            cp "$(echo Payload/*.app)/Test App" "xrOS App"
-            rm -rf Payload && rm -rf "$TMPDIR/App"
+            #Scheme="Test App"
+            #XCProject="Test App.xcodeproj"
+            #xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
+            #mkdir Payload
+            #mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
+            #zip -r9 "$Scheme.ipa" Payload
+            #cp "$(echo Payload/*.app)/Test App" "xrOS App"
+            #rm -rf Payload && rm -rf "$TMPDIR/App"
+            swiftc "My App/My App.swift" -o "xrOS App" -sdk xros
      - name: Git Push
        run: |
             git config user.name github-actions
