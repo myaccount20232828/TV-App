@@ -2,8 +2,8 @@ name: Test App
 targets:
   Test App:
     type: application
-    platform: tvOS
-    deploymentTarget: "14.0"
+    platform: visionOS
+    deploymentTarget: "1.0"
     sources: [My App]
     settings:
       base:
