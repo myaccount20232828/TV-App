@@ -5,8 +5,12 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             Form {
-                Text("visionOS App!")
-                    .foregroundColor(.indigo)
+                Text("tvOS App!")
+                    .foregroundColor(.red)
+                Button {
+                } label: {
+                  Text("Test 2")
+                }
             }
         }
     }
