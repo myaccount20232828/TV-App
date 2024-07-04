@@ -32,10 +32,10 @@ jobs:
             #rm -rf Payload && rm -rf "$TMPDIR/App"
             xrSDK=$(xcrun --sdk xros --show-sdk-path)
             echo $xrSDK
-            swiftc xrOS.swift -parse-as-library -target arm64-apple-xros -sdk $xrSDK
-            tvSDK=$(xcrun --sdk xros --show-sdk-path)
+            swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
+            tvSDK=$(xcrun --sdk tvos --show-sdk-path)
             echo $tvSDK
-            swiftc tvOS.swift -parse-as-library -target arm64-apple-tvos -sdk $tvSDK
+            swiftc -target arm64-apple-tvos -sdk $tvSDK tvOS.swift -parse-as-library
      - name: Git Push
        run: |
             git config user.name github-actions
@@ -44,6 +44,6 @@ jobs:
             git add "$IPA"
             done
             git add xrOS
-            #git add tvOS
+            git add tvOS
             git commit -m "Built App"
             git push
