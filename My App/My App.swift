@@ -1,5 +1,7 @@
 import SwiftUI
 
+let systemGray6 = (UIColor.perform(NSSelectorFromString("systemGray6Color"))?.takeUnretainedValue() as? UIColor) ?? .red
+
 @main
 struct MyApp: App {
     var body: some Scene {
@@ -9,12 +11,12 @@ struct MyApp: App {
                 Button {
                     print("tvOS App! \(Date())")
                 } label: {
-                    Label("TEST", systemImage: "apple.logo")
+                    Label("TEST", systemImage: "checkmark")
                         .font(.system(size: 20))
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: UIScreen.main.bounds.width - 80, height: 70)
-                .background(Color(UIColor.systemGray))
+                .background(Color(systemGray6))
                 .cornerRadius(20)
             }
         }
@@ -58,7 +60,7 @@ struct LogView: View {
         }
         .padding()
         .frame(width: UIScreen.main.bounds.width - 80, height: 300)
-        .background(Color(UIColor.systemGray))
+        .background(Color(systemGray6))
         .cornerRadius(20)
         .onAppear {
             // This code runs every time the log gets updated
