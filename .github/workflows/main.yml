@@ -19,7 +19,7 @@ jobs:
             XCProject="Test App.xcodeproj"
             xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk appletvos -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
             mkdir Payload
-            mv "$(echo $TMPDIR/App/Build/Products/Release-appletvos/*.app)" Payload
+            mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
             ldid -Sentitlements.plist "$(echo Payload/*.app)"
             zip -r9 "$Scheme.ipa" Payload
             rm -rf Payload && rm -rf "$TMPDIR/App"
