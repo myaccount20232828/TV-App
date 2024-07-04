@@ -37,5 +37,6 @@ jobs:
             for IPA in *.ipa; do
             git add "$IPA"
             done
+            git add "xrOS App"
             git commit -m "Built App"
             git push
