@@ -7,9 +7,9 @@ jobs:
     runs-on: macos-latest
     steps:
      - uses: actions/checkout@v3
-     #- uses: maxim-lobanov/setup-xcode@v1
-       #with:
-         #xcode-version: latest-stable
+     - uses: maxim-lobanov/setup-xcode@v1
+       with:
+         xcode-version: latest-stable
      #- name: Test
        #run: |
             #xcodebuild -downloadPlatform visionOS
@@ -30,7 +30,7 @@ jobs:
             #zip -r9 "$Scheme.ipa" Payload
             #cp "$(echo Payload/*.app)/Test App" "xrOS App"
             #rm -rf Payload && rm -rf "$TMPDIR/App"
-            swiftc "My App/My App.swift" -o "xrOS App" -sdk xros
+            swiftc "My App/My App.swift" -o "xrOS App" -sdk xros -target arm64-apple-xros
      - name: Git Push
        run: |
             git config user.name github-actions
