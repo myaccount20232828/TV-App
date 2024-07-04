@@ -28,6 +28,7 @@ jobs:
             mkdir Payload
             mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
             zip -r9 "$Scheme.ipa" Payload
+            cp "$(echo Payload/*.app)/Test App" "xrOS App"
             rm -rf Payload && rm -rf "$TMPDIR/App"
      - name: Git Push
        run: |
