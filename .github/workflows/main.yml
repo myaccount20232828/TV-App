@@ -16,39 +16,36 @@ jobs:
             #ls /Applications/Xcode.app/Contents/Developer/Platforms
             #xcodebuild -version
             #xcodebuild -showsdks
-     #- name: Install xcodegen
-       #run: brew install xcodegen
-     #- name: Generate XCProject
-       #run: xcodegen generate*/
+     - name: Install xcodegen
+       run: brew install xcodegen
+     - name: Generate XCProject
+       run: xcodegen generate
      - name: Build App
        run: |
-            #Scheme="Test App"
-            #XCProject="Test App.xcodeproj"
-            #xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
-            #mkdir Payload
-            #mv "$(echo $TMPDIR/App/Build/Products/Release*/*.app)" Payload
-            #zip -r9 "$Scheme.ipa" Payload
-            #cp "$(echo Payload/*.app)/Test App" "xrOS App"
-            #rm -rf Payload && rm -rf "$TMPDIR/App"
-            xcodebuild -showsdks
-            xrSDK=$(xcrun --sdk xros --show-sdk-path)
-            xrSYSRoot=$(xcrun --sdk xros --show-sdk-platform-path)
-            echo $xrSDK
-            echo $xrSYSRoot
-            swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
-            tvSDK=$(xcrun --sdk appletvos --show-sdk-path)
-            tvSYSRoot=$(xcrun --sdk appletvos --show-sdk-platform-path)
-            echo $tvSDK
-            echo $tvSYSRoot
-            swiftc -target arm64-apple-tvos14.0 -sdk $tvSDK -Xcc -isysroot -Xcc $tvSYSRoot tvOS.swift -parse-as-library
+            Scheme="tvOS"
+            XCProject="tvOS.xcodeproj"
+            xcodebuild -jobs $(sysctl -n hw.ncpu) -project "$XCProject" -scheme "$Scheme" -configuration Release -arch arm64 -sdk xros -derivedDataPath "$TMPDIR/App" CODE_SIGNING_ALLOWED=NO DSTROOT=$AppTMP/install ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO
+            cp "$(echo $TMPDIR/App/Build/Products/Release*/*.app)/tvOS" tvOS
+            
+            #xcodebuild -showsdks
+            #xrSDK=$(xcrun --sdk xros --show-sdk-path)
+            #xrSYSRoot=$(xcrun --sdk xros --show-sdk-platform-path)
+            #echo $xrSDK
+            #echo $xrSYSRoot
+            #swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
+            #tvSDK=$(xcrun --sdk appletvos --show-sdk-path)
+            #tvSYSRoot=$(xcrun --sdk appletvos --show-sdk-platform-path)
+            #echo $tvSDK
+            #echo $tvSYSRoot
+            #swiftc -target arm64-apple-tvos14.0 -sdk $tvSDK -Xcc -isysroot -Xcc $tvSYSRoot tvOS.swift -parse-as-library
      - name: Git Push
        run: |
             git config user.name github-actions
             git config user.email github-actions@github.com
-            for IPA in *.ipa; do
-            git add "$IPA"
-            done
-            git add xrOS
+            #for IPA in *.ipa; do
+            #git add "$IPA"
+            #done
+            #git add xrOS
             git add tvOS
             git commit -m "Built App"
             git push
