@@ -12,7 +12,7 @@ jobs:
          xcode-version: latest-stable
      - name: Test
        run: |
-            #xcodebuild -downloadPlatform visionOS
+            xcodebuild -downloadPlatform visionOS
             ls /Applications/Xcode.app/Contents/Developer/Platforms
      - name: Install xcodegen
        run: brew install xcodegen
