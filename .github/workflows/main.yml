@@ -35,7 +35,7 @@ jobs:
             xrSYSRoot=$(xcrun --sdk xros --show-sdk-platform-path)
             echo $xrSDK
             echo $xrSYSRoot
-            swiftc -target arm64-apple-xros -sdk $xrSDK -Xcc -isysroot -Xcc $xrSYSRoot xrOS.swift -parse-as-library
+            swiftc -target arm64-apple-xros -sdk $xrSDK xrOS.swift -parse-as-library
             tvSDK=$(xcrun --sdk appletvos --show-sdk-path)
             tvSYSRoot=$(xcrun --sdk appletvos --show-sdk-platform-path)
             echo $tvSDK
